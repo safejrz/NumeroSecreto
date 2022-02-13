@@ -25,6 +25,7 @@ while (x != numeroSecreto)
     int.TryParse(input, out x);
     if(x == 0)
         Console.WriteLine($"ERROR eso no es un numero ...rata");
+    //update1
 }
 
 Console.WriteLine($"Felicidades! {x} es el numero secreto");
