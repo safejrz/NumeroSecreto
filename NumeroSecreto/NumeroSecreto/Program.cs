@@ -1,31 +1,50 @@
 ﻿// See https://aka.ms/new-console-template for more information
-var min = 1;
-var max = 30;
 
-Console.WriteLine($"Hola, Adivina el numero secreto ({min}-{max}):");
-Random rnd = new Random();
-var numeroSecreto = rnd.Next(min, max);
-int x = 0;
+var otraVez = 'Y';
 
-while (x != numeroSecreto)
+do
 {
-    if (x != 0)
+    var min = 1;
+    var max = 30;
+    var r = 0;
+    var random = new Random();
+
+
+    Console.WriteLine($"Hola adivina el numero del {min} al {max}");
+    var numeroSecreto = random.Next(min, max);
+
+    while (r != numeroSecreto)
     {
-        if (x > numeroSecreto)
-            Console.WriteLine("▼ --");
-        else
-            Console.WriteLine("▲ ++");
-        if (x > max)
-            Console.WriteLine($"ERROR El numero no puede ser mayor a {max}");
-        if (x < min)
-            Console.WriteLine($"ERROR El numero no puede ser menor a {min}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        if (r != 0)
+        {
+            if (r > numeroSecreto)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("baja el num.");
+            }
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("sube el num.");
+            }
+
+        }
+
+        var palabra = Console.ReadLine();
+        int.TryParse(palabra, out r);
+        if (r == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"ERROR eso no es un numero ...rata");
+        }
     }
 
-    var input = Console.ReadLine();
-    int.TryParse(input, out x);
-    if(x == 0)
-        Console.WriteLine($"ERROR eso no es un numero ...rata");
-    //update1
-}
+    Console.WriteLine(r + "  felicidades ganaste el juego");
+    Console.WriteLine("Quieres jugar otra vez? ('Y' para si)");
 
-Console.WriteLine($"Felicidades! {x} es el numero secreto");
+    var x = Console.ReadLine().Substring(0, 1).ToUpper();
+    otraVez = x.ToCharArray()[0];
+}
+while (otraVez == 'Y');
